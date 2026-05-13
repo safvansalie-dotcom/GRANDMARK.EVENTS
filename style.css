@@ -201,7 +201,7 @@ ul { list-style: none; }
   gap: 0.75rem;
   text-decoration: none;
 }
-.logo-img { height: 44px; width: auto; } /* your logo */
+.logo-img { height: 80px; width: auto; } /* your logo */
 .logo-mark {
   font-size: 1.4rem;
   color: var(--gold);
