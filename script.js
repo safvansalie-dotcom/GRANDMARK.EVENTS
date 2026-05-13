@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", highlightNav, { passive: true });
 
   /* ── Contact form ── */
+  /* ── Contact form ── */
   const form = document.getElementById("contactForm");
   if (form) {
     form.addEventListener("submit", (e) => {
@@ -101,23 +102,40 @@ document.addEventListener("DOMContentLoaded", () => {
       const btn = form.querySelector('button[type="submit"]');
       const original = btn.textContent;
 
-      // Success animation
       btn.textContent = "Sending...";
       btn.style.opacity = "0.7";
       btn.disabled = true;
 
-      setTimeout(() => {
-        btn.textContent = "✦ Message Sent! We'll be in touch.";
-        btn.style.background = "linear-gradient(135deg, #5a7a5a, #7aaa7a)";
-        btn.style.opacity = "1";
+      emailjs
+        .sendForm(
+          "service_tmd7w7q", // 🔑 replace this
+          "template_9f3ycej", // 🔑 replace this
+          form,
+        )
+        .then(() => {
+          btn.textContent = "✦ Message Sent! We'll be in touch.";
+          btn.style.background = "linear-gradient(135deg, #5a7a5a, #7aaa7a)";
+          btn.style.opacity = "1";
 
-        setTimeout(() => {
-          btn.textContent = original;
-          btn.style.background = "";
-          btn.disabled = false;
-          form.reset();
-        }, 3500);
-      }, 1500);
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.style.background = "";
+            btn.disabled = false;
+            form.reset();
+          }, 3500);
+        })
+        .catch((err) => {
+          console.error("EmailJS error:", err);
+          btn.textContent = "Failed. Try again.";
+          btn.style.background = "linear-gradient(135deg, #7a3a3a, #aa5a5a)";
+          btn.style.opacity = "1";
+
+          setTimeout(() => {
+            btn.textContent = original;
+            btn.style.background = "";
+            btn.disabled = false;
+          }, 3000);
+        });
     });
   }
 
