@@ -2,27 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="theme-color" content="#1A1A1A"/>
+  <meta name="description" content="GrandMark Event — Luxury event planning for weddings, baby showers, birthdays, and family celebrations in Kochi, Kerala."/>
   <link rel="icon" type="image/png" href="favicon.png"/>
-<link rel="icon" type="image/png" href="favicon.png"/>
   <title>GRANDMARK.EVENT — Crafting Moments, Creating Memories</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+  <!-- Preload critical fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script> -->
-<script>emailjs.init("y654v_bJjg38p7DYJ");</script>  <!-- 🔑 replace this -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+  <script>
+    window.addEventListener("load", function() {
+      if (typeof emailjs !== "undefined") emailjs.init("y654v_bJjg38p7DYJ");
+    });
+  </script>
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <!-- Replace with your logo: <img src="logo.png" alt="GrandMark" class="logo-img"/> -->
+      <a href="#" class="nav-logo" aria-label="GrandMark Event – Home">
         <img src="logo.png.png" alt="GrandMark" class="logo-img"/>
       </a>
-      <ul class="nav-links" id="navLinks">
+      <ul class="nav-links" id="navLinks" role="list">
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#gallery">Gallery</a></li>
@@ -30,20 +39,16 @@
         <li><a href="#testimonials">Stories</a></li>
         <li><a href="#contact" class="nav-cta">Book Now</a></li>
       </ul>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero-bg">
-      <!-- Replace inner div with: <img src="hero.jpg" alt="Grand Event" class="hero-img"/> -->
-      <div class="hero-art">
-        <div class="hero-glow g1"></div>
-        <div class="hero-glow g2"></div>
-        <div class="hero-glow g3"></div>
+  <section class="hero" id="hero" aria-labelledby="heroTitle">
+    <div class="hero-bg" aria-hidden="true">
+    <img src="pic 3.png" alt="Grand Event" class="hero-img"/>
         <div class="floating-shapes">
           <span class="fs fs1">✦</span>
           <span class="fs fs2">◈</span>
@@ -54,65 +59,73 @@
       </div>
     </div>
     <div class="hero-content">
-      <p class="hero-eyebrow reveal">— Luxury Event Planning —</p>
-      <h1 class="hero-title reveal">
+      <p class="hero-eyebrow reveal">— WE PLAN YOU CELEBRATE —</p>
+      <h1 class="hero-title reveal" id="heroTitle">
         Every Moment<br/>
         <em>Deserves to Be</em><br/>
         <span class="hero-highlight">Grand</span>
       </h1>
-      <p class="hero-sub reveal">We craft unforgettable celebrations for families, weddings, and women — with elegance, warmth, and perfection in every detail.</p>
+      <p class="hero-sub reveal">Luxury Event Planning</p>
       <div class="hero-btns reveal">
         <a href="#contact" class="btn-primary">Book a Consultation</a>
         <a href="#services" class="btn-outline">Explore Services</a>
       </div>
-      <div class="hero-stats reveal">
-        <div class="stat"><span class="stat-num">4+</span><span class="stat-label">Years Combined Experience</span></div>
-        <div class="stat-div"></div>
-        <div class="stat"><span class="stat-num">100%</span><span class="stat-label">On-Time Delivery</span></div>
-        <div class="stat-div"></div>
-        <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Passion & Dedication</span></div>
+      <div class="hero-stats reveal" aria-label="Company highlights">
+        <div class="stat">
+          <span class="stat-num" aria-label="4 plus years">2+</span>
+          <span class="stat-label">Years Of Experience</span>
+        </div>
+        <div class="stat-div" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-num" aria-label="100 percent">100%</span>
+          <span class="stat-label">On-Time Delivery</span>
+        </div>
+        <div class="stat-div" aria-hidden="true"></div>
+        <div class="stat">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">Passion & Dedication</span>
+        </div>
       </div>
     </div>
-    <div class="hero-scroll-hint">
+    <div class="hero-scroll-hint" aria-hidden="true">
       <span>Scroll</span>
       <span class="scroll-line"></span>
     </div>
   </section>
 
   <!-- MARQUEE RIBBON -->
-  <div class="ribbon-wrap">
+  <div class="ribbon-wrap" aria-hidden="true">
     <div class="ribbon-track">
       <span>Weddings &nbsp;✦&nbsp; Baby Showers &nbsp;✦&nbsp; Birthday Galas &nbsp;✦&nbsp; Family Reunions &nbsp;✦&nbsp; Bridal Events &nbsp;✦&nbsp; Corporate Celebrations &nbsp;✦&nbsp; Anniversary Parties &nbsp;✦&nbsp; Cultural Ceremonies &nbsp;✦&nbsp;</span>
-      <span aria-hidden="true">Weddings &nbsp;✦&nbsp; Baby Showers &nbsp;✦&nbsp; Birthday Galas &nbsp;✦&nbsp; Family Reunions &nbsp;✦&nbsp; Bridal Events &nbsp;✦&nbsp; Corporate Celebrations &nbsp;✦&nbsp; Anniversary Parties &nbsp;✦&nbsp; Cultural Ceremonies &nbsp;✦&nbsp;</span>
+      <span>Weddings &nbsp;✦&nbsp; Baby Showers &nbsp;✦&nbsp; Birthday Galas &nbsp;✦&nbsp; Family Reunions &nbsp;✦&nbsp; Bridal Events &nbsp;✦&nbsp; Corporate Celebrations &nbsp;✦&nbsp; Anniversary Parties &nbsp;✦&nbsp; Cultural Ceremonies &nbsp;✦&nbsp;</span>
     </div>
   </div>
 
   <!-- ABOUT -->
-  <section class="about section" id="about">
+  <section class="about section" id="about" aria-labelledby="aboutTitle">
     <div class="container about-grid">
       <div class="about-visual reveal">
         <div class="about-img-frame">
-          <!-- Replace with: <img src="about.jpg" alt="About GrandMark" class="about-img"/> -->
-          <div class="about-img-placeholder">
-            <div class="ab-circle c1"></div>
-            <div class="ab-circle c2"></div>
-            <div class="ab-icon">✦</div>
+          <div class="about-img-placeholder" role="img" aria-label="About GrandMark Event">
+            <div class="ab-circle c1" aria-hidden="true"></div>
+            <div class="ab-circle c2" aria-hidden="true"></div>
+            <div class="ab-icon" aria-hidden="true">✦</div>
           </div>
-          <div class="about-badge">
-            <span class="badge-num">4+</span>
-            <span class="badge-txt">Years of Combined<br/>Experience</span>
+          <div class="about-badge" aria-label="4 plus years of experience">
+            <span class="badge-num">2+</span>
+            <span class="badge-txt">Years of <br/>Experience</span>
           </div>
         </div>
       </div>
       <div class="about-text">
         <p class="section-tag reveal">Our Story</p>
-        <h2 class="section-title reveal">Where Vision Meets <em>Elegance</em></h2>
+        <h2 class="section-title reveal" id="aboutTitle">Where Vision Meets <em>Elegance</em></h2>
         <p class="body-text reveal">At <strong>GrandMark.Event</strong>, we are a fresh, passionate team with a shared belief: every celebration deserves to be extraordinary. We may be new as a company, but our team brings together <strong>4+ years of combined hands-on experience</strong> in event styling, coordination, and client care — and we put every bit of it into your event.</p>
         <p class="body-text reveal">What sets us apart is our promise: <strong>your vision, delivered on time, every time.</strong> We listen deeply, plan meticulously, and execute flawlessly — so you can be fully present in your moment while we handle every detail behind the scenes.</p>
         <div class="about-values reveal">
-          <div class="av-item"><i class="fa fa-heart"></i><span>Family First</span></div>
-          <div class="av-item"><i class="fa fa-clock"></i><span>Always On Time</span></div>
-          <div class="av-item"><i class="fa fa-handshake"></i><span>Client Focused</span></div>
+          <div class="av-item"><i class="fa fa-heart" aria-hidden="true"></i><span>Family First</span></div>
+          <div class="av-item"><i class="fa fa-clock" aria-hidden="true"></i><span>Always On Time</span></div>
+          <div class="av-item"><i class="fa fa-handshake" aria-hidden="true"></i><span>Client Focused</span></div>
         </div>
         <a href="#contact" class="btn-primary reveal">Meet Our Team</a>
       </div>
@@ -120,108 +133,107 @@
   </section>
 
   <!-- SERVICES -->
-  <section class="services section" id="services">
+  <section class="services section" id="services" aria-labelledby="servicesTitle">
     <div class="container">
       <div class="section-head center">
         <p class="section-tag reveal">What We Do</p>
-        <h2 class="section-title reveal">Crafted for Every <em>Celebration</em></h2>
+        <h2 class="section-title reveal" id="servicesTitle">Crafted for Every <em>Celebration</em></h2>
         <p class="section-desc reveal">From intimate gatherings to grand galas — every event is planned with heart and delivered with excellence.</p>
       </div>
       <div class="services-grid">
         <div class="service-card glass reveal">
-          <div class="sc-icon"><i class="fa fa-ring"></i></div>
+          <div class="sc-icon" aria-hidden="true"><i class="fa fa-ring"></i></div>
           <h3>Wedding Planning</h3>
           <p>Full-service wedding coordination from venue to vows — your dream day, perfectly orchestrated.</p>
-          <a href="#contact" class="sc-link">Learn More <i class="fa fa-arrow-right"></i></a>
+          <a href="#contact" class="sc-link">Let's Connect <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </div>
         <div class="service-card glass reveal">
-          <div class="sc-icon"><i class="fa fa-baby"></i></div>
+          <div class="sc-icon" aria-hidden="true"><i class="fa fa-baby"></i></div>
           <h3>Baby Showers</h3>
           <p>Warm, whimsical, and beautifully styled celebrations welcoming the newest family member.</p>
-          <a href="#contact" class="sc-link">Learn More <i class="fa fa-arrow-right"></i></a>
+          <a href="#contact" class="sc-link">Let's Connect <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </div>
         <div class="service-card glass reveal">
-          <div class="sc-icon"><i class="fa fa-birthday-cake"></i></div>
+          <div class="sc-icon" aria-hidden="true"><i class="fa fa-birthday-cake"></i></div>
           <h3>Birthday Galas</h3>
           <p>Grand milestone birthday parties and intimate celebrations that reflect your unique personality.</p>
-          <a href="#contact" class="sc-link">Learn More <i class="fa fa-arrow-right"></i></a>
+          <a href="#contact" class="sc-link">Let's Connect <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </div>
         <div class="service-card glass reveal">
-          <div class="sc-icon"><i class="fa fa-users"></i></div>
+          <div class="sc-icon" aria-hidden="true"><i class="fa fa-users"></i></div>
           <h3>Family Reunions</h3>
           <p>Reunite your family in style — customized gatherings that bring generations together with joy.</p>
-          <a href="#contact" class="sc-link">Learn More <i class="fa fa-arrow-right"></i></a>
+          <a href="#contact" class="sc-link">Let's Connect <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </div>
         <div class="service-card glass reveal">
-          <div class="sc-icon"><i class="fa fa-crown"></i></div>
+          <div class="sc-icon" aria-hidden="true"><i class="fa fa-crown"></i></div>
           <h3>Women's Galas</h3>
           <p>Empowering and elegant events celebrating women — from bridal showers to ladies' nights.</p>
-          <a href="#contact" class="sc-link">Learn More <i class="fa fa-arrow-right"></i></a>
+          <a href="#contact" class="sc-link">Let's Connect <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </div>
         <div class="service-card glass reveal">
-          <div class="sc-icon"><i class="fa fa-champagne-glasses"></i></div>
+          <div class="sc-icon" aria-hidden="true"><i class="fa fa-champagne-glasses"></i></div>
           <h3>Anniversary Parties</h3>
           <p>Renew your love story with a beautifully curated anniversary celebration that honors your journey.</p>
-          <a href="#contact" class="sc-link">Learn More <i class="fa fa-arrow-right"></i></a>
+          <a href="#contact" class="sc-link">Let's Connect <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- GALLERY -->
-  <section class="gallery section" id="gallery">
+  <section class="gallery section" id="gallery" aria-labelledby="galleryTitle">
     <div class="container">
       <div class="section-head center">
         <p class="section-tag reveal">Our Portfolio</p>
-        <h2 class="section-title reveal">Moments We've <em>Made Grand</em></h2>
+        <h2 class="section-title reveal" id="galleryTitle">Moments We've <em>Made Grand</em></h2>
       </div>
-      <div class="gallery-grid">
-        <!-- Replace .gi-placeholder divs with <img src="photo.jpg" alt=""/> for real images -->
-        <div class="gallery-item gi-tall reveal">
-          <div class="gi-placeholder gp1"></div>
-          <div class="gi-overlay"><span>Wedding Ceremony</span></div>
+      <div class="gallery-grid" role="list">
+        <div class="gallery-item gi-tall reveal" role="listitem">
+          <div class="gi-placeholder gp1" role="img" aria-label="Wedding Ceremony"></div>
+          <div class="gi-overlay" aria-hidden="true"><span>Wedding Ceremony</span></div>
         </div>
-        <div class="gallery-item reveal">
-          <div class="gi-placeholder gp2"></div>
-          <div class="gi-overlay"><span>Baby Shower</span></div>
+        <div class="gallery-item reveal" role="listitem">
+          <div class="gi-placeholder gp2" role="img" aria-label="Baby Shower"></div>
+          <div class="gi-overlay" aria-hidden="true"><span>Baby Shower</span></div>
         </div>
-        <div class="gallery-item reveal">
-          <div class="gi-placeholder gp3"></div>
-          <div class="gi-overlay"><span>Birthday Gala</span></div>
+        <div class="gallery-item reveal" role="listitem">
+          <div class="gi-placeholder gp3" role="img" aria-label="Birthday Gala"></div>
+          <div class="gi-overlay" aria-hidden="true"><span>Birthday Gala</span></div>
         </div>
-        <div class="gallery-item gi-wide reveal">
-          <div class="gi-placeholder gp4"></div>
-          <div class="gi-overlay"><span>Family Reunion</span></div>
+        <div class="gallery-item gi-wide reveal" role="listitem">
+          <div class="gi-placeholder gp4" role="img" aria-label="Family Reunion"></div>
+          <div class="gi-overlay" aria-hidden="true"><span>Family Reunion</span></div>
         </div>
-        <div class="gallery-item reveal">
-          <div class="gi-placeholder gp5"></div>
-          <div class="gi-overlay"><span>Ladies' Gala</span></div>
+        <div class="gallery-item reveal" role="listitem">
+          <div class="gi-placeholder gp5" role="img" aria-label="Ladies' Gala"></div>
+          <div class="gi-overlay" aria-hidden="true"><span>Ladies' Gala</span></div>
         </div>
       </div>
-      <div class="center reveal" style="margin-top:3rem">
+      <div class="center reveal" style="margin-top:2.5rem">
         <a href="#contact" class="btn-primary">View Full Portfolio</a>
       </div>
     </div>
   </section>
 
   <!-- TESTIMONIALS -->
-  <section class="testimonials section" id="testimonials">
-    <div class="testi-bg-art">
+  <section class="testimonials section" id="testimonials" aria-labelledby="testimonialsTitle">
+    <div class="testi-bg-art" aria-hidden="true">
       <div class="tb-circle tc1"></div>
       <div class="tb-circle tc2"></div>
     </div>
     <div class="container">
       <div class="section-head center">
         <p class="section-tag reveal">Love Stories</p>
-        <h2 class="section-title reveal">What Our Families <em>Say</em></h2>
+        <h2 class="section-title reveal" id="testimonialsTitle">What Our Families <em>Say</em></h2>
       </div>
       <div class="testi-grid">
         <div class="testi-card glass reveal">
-          <div class="testi-quote-icon">"</div>
-          <div class="testi-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+          <div class="testi-quote-icon" aria-hidden="true">"</div>
+          <div class="testi-stars" aria-label="5 stars"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></div>
           <p class="testi-text">"GrandMark turned our wedding into an absolute fairy tale. Every single detail was perfect — beyond anything we had imagined. They truly understood our vision."</p>
           <div class="testi-author">
-            <div class="testi-avatar">S</div>
+            <div class="testi-avatar" aria-hidden="true">S</div>
             <div>
               <strong>Sarah & James</strong>
               <span>Wedding, 2024</span>
@@ -229,11 +241,11 @@
           </div>
         </div>
         <div class="testi-card glass reveal featured-t">
-          <div class="testi-quote-icon">"</div>
-          <div class="testi-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+          <div class="testi-quote-icon" aria-hidden="true">"</div>
+          <div class="testi-stars" aria-label="5 stars"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></div>
           <p class="testi-text">"The baby shower they planned for me was breathtaking. The decorations, the flow, the little touches — I cried tears of joy. Every mom deserves this experience."</p>
           <div class="testi-author">
-            <div class="testi-avatar">A</div>
+            <div class="testi-avatar" aria-hidden="true">A</div>
             <div>
               <strong>Amina Rashid</strong>
               <span>Baby Shower, 2024</span>
@@ -241,11 +253,11 @@
           </div>
         </div>
         <div class="testi-card glass reveal">
-          <div class="testi-quote-icon">"</div>
-          <div class="testi-stars"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+          <div class="testi-quote-icon" aria-hidden="true">"</div>
+          <div class="testi-stars" aria-label="5 stars"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></div>
           <p class="testi-text">"Our family reunion was a masterpiece. 120 family members from across the world, all brought together seamlessly. GrandMark handled everything flawlessly."</p>
           <div class="testi-author">
-            <div class="testi-avatar">P</div>
+            <div class="testi-avatar" aria-hidden="true">P</div>
             <div>
               <strong>Priya Menon</strong>
               <span>Family Reunion, 2023</span>
@@ -257,58 +269,58 @@
   </section>
 
   <!-- PACKAGES -->
-  <section class="packages section" id="packages">
+  <section class="packages section" id="packages" aria-labelledby="packagesTitle">
     <div class="container">
       <div class="section-head center">
         <p class="section-tag reveal">Invest in Memories</p>
-        <h2 class="section-title reveal">Choose Your <em>Experience</em></h2>
+        <h2 class="section-title reveal" id="packagesTitle">Choose Your <em>Experience</em></h2>
         <p class="section-desc reveal">Every package is fully customizable. Let us tailor the perfect plan for your celebration.</p>
       </div>
       <div class="pkg-grid">
         <div class="pkg-card glass reveal">
           <div class="pkg-tier">Essential</div>
-          <div class="pkg-icon"><i class="fa fa-seedling"></i></div>
+          <div class="pkg-icon" aria-hidden="true"><i class="fa fa-seedling"></i></div>
           <h3 class="pkg-name">Blossom</h3>
           <div class="pkg-price"><span class="currency">$</span>1,200</div>
           <p class="pkg-desc">Perfect for intimate gatherings and smaller celebrations.</p>
           <ul class="pkg-list">
-            <li><i class="fa fa-check"></i> Up to 50 Guests</li>
-            <li><i class="fa fa-check"></i> Venue Coordination</li>
-            <li><i class="fa fa-check"></i> Decor Setup</li>
-            <li><i class="fa fa-check"></i> 1 Event Coordinator</li>
-            <li><i class="fa fa-check"></i> Basic Photography</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Up to 50 Guests</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Venue Coordination</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Decor Setup</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> 1 Event Coordinator</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Basic Photography</li>
           </ul>
           <a href="#contact" class="btn-outline-pkg">Get Quote</a>
         </div>
         <div class="pkg-card glass reveal featured-pkg">
           <div class="pkg-tier popular">Most Popular</div>
-          <div class="pkg-icon"><i class="fa fa-gem"></i></div>
+          <div class="pkg-icon" aria-hidden="true"><i class="fa fa-gem"></i></div>
           <h3 class="pkg-name">Golden</h3>
           <div class="pkg-price"><span class="currency">$</span>3,500</div>
           <p class="pkg-desc">Our signature package — full luxury for your milestone moments.</p>
           <ul class="pkg-list">
-            <li><i class="fa fa-check"></i> Up to 150 Guests</li>
-            <li><i class="fa fa-check"></i> Full Venue Styling</li>
-            <li><i class="fa fa-check"></i> Custom Decor Theme</li>
-            <li><i class="fa fa-check"></i> 3 Coordinators</li>
-            <li><i class="fa fa-check"></i> Photography + Video</li>
-            <li><i class="fa fa-check"></i> Catering Liaison</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Up to 150 Guests</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Full Venue Styling</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Custom Decor Theme</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> 3 Coordinators</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Photography + Video</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Catering Liaison</li>
           </ul>
           <a href="#contact" class="btn-primary">Book Now</a>
         </div>
         <div class="pkg-card glass reveal">
           <div class="pkg-tier">Ultimate</div>
-          <div class="pkg-icon"><i class="fa fa-crown"></i></div>
+          <div class="pkg-icon" aria-hidden="true"><i class="fa fa-crown"></i></div>
           <h3 class="pkg-name">Grand</h3>
-          <div class="pkg-price"><span class="currency">$</span>7,000<span style="font-size:1.2rem">+</span></div>
+          <div class="pkg-price"><span class="currency">$</span>7,000<span style="font-size:1.1rem">+</span></div>
           <p class="pkg-desc">White-glove, end-to-end luxury for grand scale events.</p>
           <ul class="pkg-list">
-            <li><i class="fa fa-check"></i> Unlimited Guests</li>
-            <li><i class="fa fa-check"></i> Luxury Venue Sourcing</li>
-            <li><i class="fa fa-check"></i> Full Bespoke Design</li>
-            <li><i class="fa fa-check"></i> Dedicated Team</li>
-            <li><i class="fa fa-check"></i> Premium A/V Setup</li>
-            <li><i class="fa fa-check"></i> Full Catering + Floral</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Unlimited Guests</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Luxury Venue Sourcing</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Full Bespoke Design</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Dedicated Team</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Premium A/V Setup</li>
+            <li><i class="fa fa-check" aria-hidden="true"></i> Full Catering + Floral</li>
           </ul>
           <a href="#contact" class="btn-outline-pkg">Get Quote</a>
         </div>
@@ -317,40 +329,57 @@
   </section>
 
   <!-- CONTACT -->
-  <section class="contact section" id="contact">
+  <section class="contact section" id="contact" aria-labelledby="contactTitle">
     <div class="container contact-grid">
       <div class="contact-info reveal">
         <p class="section-tag">Let's Connect</p>
-        <h2 class="section-title">Start Planning Your <em>Grand</em> Moment</h2>
+        <h2 class="section-title" id="contactTitle">Start Planning Your <em>Grand</em> Moment</h2>
         <p class="body-text">Ready to create something beautiful? Reach out and let us bring your vision to life. We'd love to hear your story.</p>
         <div class="contact-details">
-          <div class="cd-item"><i class="fa fa-phone"></i><div><strong>Call Us</strong><span>+1 (555) 000-0000</span></div></div>
-          <div class="cd-item"><i class="fa fa-envelope"></i><div><strong>Email</strong><span>hello@grandmark.event</span></div></div>
-          <div class="cd-item"><i class="fa fa-location-dot"></i><div><strong>Location</strong><span>Your City, Country</span></div></div>
+          <div class="cd-item">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            <div><strong>Call Us</strong><span>+91 80890 44311</span></div>
+          </div>
+          <div class="cd-item">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
+            <div><strong>Email</strong><span>hello@grandmark.event</span></div>
+          </div>
+          <div class="cd-item">
+            <i class="fa fa-location-dot" aria-hidden="true"></i>
+            <div><strong>Location</strong><span>Kochi, Ernakulam</span></div>
+          </div>
         </div>
         <div class="social-row">
-          <a href="#" class="soc-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="soc-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="soc-btn" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-          <a href="#" class="soc-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://instagram.com/Grandmark.events" class="soc-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a href="https://facebook.com/yourusername" class="soc-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+          </a>
+          <a href="https://pinterest.com/yourusername" class="soc-btn" aria-label="Pinterest" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-pinterest-p" aria-hidden="true"></i>
+          </a>
+          <a href="https://wa.me/918075260214" class="soc-btn" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+          </a>
         </div>
       </div>
       <div class="contact-form-wrap glass reveal">
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form" id="contactForm" novalidate>
           <div class="form-row">
             <div class="form-group">
               <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" placeholder="Jane Smith" required/>
+              <input type="text" id="name" name="name" placeholder="Jane Smith" required autocomplete="name"/>
             </div>
             <div class="form-group">
               <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" placeholder="jane@email.com" required/>
+              <input type="email" id="email" name="email" placeholder="jane@email.com" required autocomplete="email"/>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" name="phone" placeholder="+91 12345 67890"/>
+              <input type="tel" id="phone" name="phone" placeholder="+91 12345 67890" autocomplete="tel"/>
             </div>
             <div class="form-group">
               <label for="event">Event Type</label>
@@ -360,7 +389,6 @@
                 <option>Baby Shower</option>
                 <option>Birthday Gala</option>
                 <option>Family Reunion</option>
-                <!-- <option>Women's Gala</option> -->
                 <option>Anniversary</option>
                 <option>Other</option>
               </select>
@@ -368,7 +396,7 @@
           </div>
           <div class="form-group">
             <label for="date">Event Date</label>
-            <input type="date" id="date" name="date"/>
+            <input type="date" id="date" name="date" autocomplete="off"/>
           </div>
           <div class="form-group">
             <label for="message">Tell Us About Your Dream Event</label>
@@ -382,23 +410,19 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer class="footer" role="contentinfo">
     <div class="footer-top">
       <div class="container footer-grid">
         <div class="footer-brand">
-          <a href="#" class="nav-logo footer-logo">
-            <span class="logo-mark">✦</span>
-            <div>
-              <span class="logo-main">GRANDMARK</span>
-              <span class="logo-sub">EVENT</span>
-            </div>
+          <a href="#" class="nav-logo footer-logo" aria-label="GrandMark Event – Home">
+            <img src="logo.png.png" alt="GrandMark" class="logo-img"/>
           </a>
           <p>Crafting unforgettable moments for families and women — with elegance, warmth, and heart in every detail.</p>
           <div class="social-row">
-            <a href="#" class="soc-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="soc-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="soc-btn" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-            <a href="#" class="soc-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://instagram.com/Grandmark.events" class="soc-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://facebook.com/yourusername" class="soc-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="https://pinterest.com/yourusername" class="soc-btn" aria-label="Pinterest" target="_blank" rel="noopener noreferrer"><i class="fab fa-pinterest-p" aria-hidden="true"></i></a>
+            <a href="https://wa.me/918075260214" class="soc-btn" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
           </div>
         </div>
         <div class="footer-col">
@@ -425,11 +449,11 @@
         <div class="footer-col">
           <h4>Contact</h4>
           <ul class="contact-list">
-            <li><i class="fa fa-phone"></i> +91 8089044311</li>
-            <li><i class="fa fa-envelope"></i> hello@grandmark.event</li>
-            <li><i class="fa fa-location-dot"></i> Kochi,Ernakulam</li>
+            <li><i class="fa fa-phone" aria-hidden="true"></i> +91 8089044311</li>
+            <li><i class="fa fa-envelope" aria-hidden="true"></i> hello@grandmark.event</li>
+            <li><i class="fa fa-location-dot" aria-hidden="true"></i> Kochi, Ernakulam</li>
           </ul>
-          <a href="#contact" class="btn-primary" style="margin-top:1.5rem;display:inline-block;font-size:0.85rem">Book Consultation</a>
+          <a href="#contact" class="btn-primary" style="margin-top:1.4rem;display:inline-block;font-size:0.82rem">Book Consultation</a>
         </div>
       </div>
     </div>
