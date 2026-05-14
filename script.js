@@ -343,3 +343,44 @@ document.addEventListener("DOMContentLoaded", () => {
   setVh();
   window.addEventListener("resize", setVh, { passive: true });
 });
+/* ── Floating Contact Widget ── */
+(function () {
+  const toggle   = document.getElementById("floatToggle");
+  const floatWA  = document.getElementById("floatWA");
+  const floatCall= document.getElementById("floatCall");
+  const widget   = document.getElementById("floatContact");
+  if (!toggle) return;
+
+  let isOpen = false;
+
+  const open = () => {
+    isOpen = true;
+    toggle.classList.add("open");
+    toggle.setAttribute("aria-expanded", "true");
+    floatCall.classList.add("visible");
+    floatWA.classList.add("visible");
+  };
+
+  const close = () => {
+    isOpen = false;
+    toggle.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+    floatCall.classList.remove("visible");
+    floatWA.classList.remove("visible");
+  };
+
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    isOpen ? close() : open();
+  });
+
+  // Close when clicking outside the widget
+  document.addEventListener("click", (e) => {
+    if (isOpen && !widget.contains(e.target)) close();
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isOpen) close();
+  });
+})();
