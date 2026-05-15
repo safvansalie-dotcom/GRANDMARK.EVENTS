@@ -384,60 +384,48 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape" && isOpen) close();
   });
 })();
-/* ── Infinite Gallery Slider ── */
+/* ── Infinite Auto Moving Gallery ── */
 const slider = document.getElementById("gallerySlider");
 
 if (slider) {
-  // Clone all cards and append for infinite effect
   const cards = Array.from(slider.querySelectorAll(".gs-card"));
 
-  // Clone and append at end
-  cards.forEach((card) => {
+  // Clone cards for infinite loop
+  cards.forEach(card => {
     const clone = card.cloneNode(true);
     clone.setAttribute("aria-hidden", "true");
     slider.appendChild(clone);
   });
 
-  // Clone and prepend at start
-  [...cards].reverse().forEach((card) => {
+  cards.forEach(card => {
     const clone = card.cloneNode(true);
     clone.setAttribute("aria-hidden", "true");
-    slider.prepend(clone);
+    slider.appendChild(clone);
   });
 
   const cardWidth = () => slider.querySelector(".gs-card").offsetWidth + 24;
+  let speed = 1; // pixels per frame — increase for faster
+  let isPaused = false;
+  let animFrame;
 
-  // Start position at first real card (after clones)
-  slider.scrollLeft = cardWidth() * cards.length;
-
-  // Seamless infinite loop
-  slider.addEventListener("scroll", () => {
-    const totalReal = cardWidth() * cards.length;
-    const max = cardWidth() * cards.length * 2;
-
-    if (slider.scrollLeft <= 0) {
-      slider.scrollLeft = totalReal;
+  const autoMove = () => {
+    if (!isPaused) {
+      slider.scrollLeft += speed;
+      // Reset to start for infinite loop
+      if (slider.scrollLeft >= cardWidth() * cards.length) {
+        slider.scrollLeft = 0;
+      }
     }
-    if (slider.scrollLeft >= max) {
-      slider.scrollLeft = totalReal;
-    }
-  });
+    animFrame = requestAnimationFrame(autoMove);
+  };
+  autoMove();
 
-  // Arrow buttons
-  document.querySelector(".gs-prev").addEventListener("click", () => {
-    slider.scrollBy({ left: -cardWidth(), behavior: "smooth" });
-  });
-  document.querySelector(".gs-next").addEventListener("click", () => {
-    slider.scrollBy({ left: cardWidth(), behavior: "smooth" });
-  });
-
-  // Drag to scroll — desktop
-  let isDown = false,
-    startX,
-    scrollLeft;
+  // Pause on mouse drag
+  let isDown = false, startX, scrollLeft;
 
   slider.addEventListener("mousedown", (e) => {
     isDown = true;
+    isPaused = true;
     slider.classList.add("grabbing");
     startX = e.clientX;
     scrollLeft = slider.scrollLeft;
@@ -445,49 +433,34 @@ if (slider) {
   });
 
   document.addEventListener("mouseup", () => {
+    if (!isDown) return;
     isDown = false;
     slider.classList.remove("grabbing");
+    // Resume after 2 seconds
+    setTimeout(() => { isPaused = false; }, 2000);
   });
 
   document.addEventListener("mousemove", (e) => {
     if (!isDown) return;
-    const x = e.clientX;
-    const walk = (startX - x) * 1.5;
+    const walk = (startX - e.clientX) * 1.5;
     slider.scrollLeft = scrollLeft + walk;
   });
 
-  // Touch swipe — mobile
-  let touchStartX = 0;
-  slider.addEventListener(
-    "touchstart",
-    (e) => {
-      touchStartX = e.touches[0].clientX;
-    },
-    { passive: true },
-  );
-  slider.addEventListener(
-    "touchmove",
-    (e) => {
-      const diff = touchStartX - e.touches[0].clientX;
-      slider.scrollLeft += diff * 0.8;
-      touchStartX = e.touches[0].clientX;
-    },
-    { passive: true },
-  );
+  // Pause on touch
+  slider.addEventListener("touchstart", (e) => {
+    isPaused = true;
+    startX = e.touches[0].clientX;
+    scrollLeft = slider.scrollLeft;
+  }, { passive: true });
 
-  // Auto scroll
-  let autoScroll = setInterval(() => {
-    slider.scrollBy({ left: cardWidth(), behavior: "smooth" });
-  }, 3000);
+  slider.addEventListener("touchmove", (e) => {
+    const diff = startX - e.touches[0].clientX;
+    slider.scrollLeft += diff * 0.8;
+    startX = e.touches[0].clientX;
+  }, { passive: true });
 
-  // Pause auto scroll on interaction
-  slider.addEventListener("mouseenter", () => clearInterval(autoScroll));
-  slider.addEventListener("touchstart", () => clearInterval(autoScroll), {
-    passive: true,
-  });
-  slider.addEventListener("mouseleave", () => {
-    autoScroll = setInterval(() => {
-      slider.scrollBy({ left: cardWidth(), behavior: "smooth" });
-    }, 3000);
-  });
+  slider.addEventListener("touchend", () => {
+    // Resume after 2 seconds
+    setTimeout(() => { isPaused = false; }, 2000);
+  }, { passive: true });
 }
