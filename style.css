@@ -59,6 +59,7 @@ ul { list-style: none; }
   color: var(--gold);
   display: block;
   margin-bottom: 0.75rem;
+  margin-top:30px;
 }
 .section-title {
   font-family: var(--font-head);
