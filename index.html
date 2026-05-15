@@ -181,40 +181,76 @@
     </div>
   </section>
 
-  <!-- GALLERY -->
-  <section class="gallery section" id="gallery" aria-labelledby="galleryTitle">
-    <div class="container">
-      <div class="section-head center">
-        <p class="section-tag reveal">Our Portfolio</p>
-        <h2 class="section-title reveal" id="galleryTitle">Moments We've <em>Made Grand</em></h2>
-      </div>
-      <div class="gallery-grid" role="list">
-        <div class="gallery-item gi-tall reveal" role="listitem">
-          <div class="gi-placeholder gp1" role="img" aria-label="Wedding Ceremony"></div>
-          <div class="gi-overlay" aria-hidden="true"><span>Wedding Ceremony</span></div>
-        </div>
-        <div class="gallery-item reveal" role="listitem">
-          <div class="gi-placeholder gp2" role="img" aria-label="Baby Shower"></div>
-          <div class="gi-overlay" aria-hidden="true"><span>Baby Shower</span></div>
-        </div>
-        <div class="gallery-item reveal" role="listitem">
-          <div class="gi-placeholder gp3" role="img" aria-label="Birthday Gala"></div>
-          <div class="gi-overlay" aria-hidden="true"><span>Birthday Gala</span></div>
-        </div>
-        <div class="gallery-item gi-wide reveal" role="listitem">
-          <div class="gi-placeholder gp4" role="img" aria-label="Family Reunion"></div>
-          <div class="gi-overlay" aria-hidden="true"><span>Family Reunion</span></div>
-        </div>
-        <div class="gallery-item reveal" role="listitem">
-          <div class="gi-placeholder gp5" role="img" aria-label="Ladies' Gala"></div>
-          <div class="gi-overlay" aria-hidden="true"><span>Ladies' Gala</span></div>
-        </div>
-      </div>
-      <div class="center reveal" style="margin-top:2.5rem">
-        <a href="#contact" class="btn-primary">View Full Portfolio</a>
-      </div>
+<!-- GALLERY -->
+<section class="gallery section" id="gallery">
+  <div class="container">
+    <div class="section-head center">
+      <p class="section-tag reveal">Our Portfolio</p>
+      <h2 class="section-title reveal">Moments We've <em>Made Grand</em></h2>
     </div>
-  </section>
+  </div>
+
+  <div class="gallery-slider-wrap">
+    <div class="gallery-slider" id="gallerySlider">
+
+      <!-- Original 6 cards -->
+      <div class="gs-card">
+        <div class="gs-img-wrap">
+          <img src="wedding-img-1.png" alt="Wedding Ceremony"/>
+          <div class="gs-overlay"><span class="gs-name">Wedding Ceremony</span></div>
+        </div>
+      </div>
+
+      <div class="gs-card">
+        <div class="gs-img-wrap">
+          <img src="baby_shower.png" alt="Baby Shower"/>
+          <div class="gs-overlay"><span class="gs-name">Baby Shower</span></div>
+        </div>
+      </div>
+
+      <div class="gs-card">
+        <div class="gs-img-wrap">
+          <img src="birthday_party_.png" alt="Birthday Gala"/>
+          <div class="gs-overlay"><span class="gs-name">Birthday Gala</span></div>
+        </div>
+      </div>
+
+      <div class="gs-card">
+        <div class="gs-img-wrap">
+          <img src="reunion-image.png" alt="Family Reunion"/>
+          <div class="gs-overlay"><span class="gs-name">Family Reunion</span></div>
+        </div>
+      </div>
+
+      <div class="gs-card">
+        <div class="gs-img-wrap">
+          <img src="bridal_shower_decor.png" alt="Women's Gala"/>
+          <div class="gs-overlay"><span class="gs-name">Women's Gala</span></div>
+        </div>
+      </div>
+
+      <div class="gs-card">
+        <div class="gs-img-wrap">
+          <img src="anniversary_event.png" alt="Anniversary Party"/>
+          <div class="gs-overlay"><span class="gs-name">Anniversary Party</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ARROWS -->
+    <button class="gs-arrow gs-prev" aria-label="Previous">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+    <button class="gs-arrow gs-next" aria-label="Next">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <div class="center reveal" style="margin-top:3rem">
+    <a href="#contact" class="btn-primary">Book Your Event</a>
+  </div>
+</section>
 
   <!-- TESTIMONIALS
   <section class="testimonials section" id="testimonials" aria-labelledby="testimonialsTitle">

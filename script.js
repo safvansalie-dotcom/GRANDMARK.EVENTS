@@ -384,3 +384,110 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape" && isOpen) close();
   });
 })();
+/* ── Infinite Gallery Slider ── */
+const slider = document.getElementById("gallerySlider");
+
+if (slider) {
+  // Clone all cards and append for infinite effect
+  const cards = Array.from(slider.querySelectorAll(".gs-card"));
+
+  // Clone and append at end
+  cards.forEach((card) => {
+    const clone = card.cloneNode(true);
+    clone.setAttribute("aria-hidden", "true");
+    slider.appendChild(clone);
+  });
+
+  // Clone and prepend at start
+  [...cards].reverse().forEach((card) => {
+    const clone = card.cloneNode(true);
+    clone.setAttribute("aria-hidden", "true");
+    slider.prepend(clone);
+  });
+
+  const cardWidth = () => slider.querySelector(".gs-card").offsetWidth + 24;
+
+  // Start position at first real card (after clones)
+  slider.scrollLeft = cardWidth() * cards.length;
+
+  // Seamless infinite loop
+  slider.addEventListener("scroll", () => {
+    const totalReal = cardWidth() * cards.length;
+    const max = cardWidth() * cards.length * 2;
+
+    if (slider.scrollLeft <= 0) {
+      slider.scrollLeft = totalReal;
+    }
+    if (slider.scrollLeft >= max) {
+      slider.scrollLeft = totalReal;
+    }
+  });
+
+  // Arrow buttons
+  document.querySelector(".gs-prev").addEventListener("click", () => {
+    slider.scrollBy({ left: -cardWidth(), behavior: "smooth" });
+  });
+  document.querySelector(".gs-next").addEventListener("click", () => {
+    slider.scrollBy({ left: cardWidth(), behavior: "smooth" });
+  });
+
+  // Drag to scroll — desktop
+  let isDown = false,
+    startX,
+    scrollLeft;
+
+  slider.addEventListener("mousedown", (e) => {
+    isDown = true;
+    slider.classList.add("grabbing");
+    startX = e.clientX;
+    scrollLeft = slider.scrollLeft;
+    e.preventDefault();
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDown = false;
+    slider.classList.remove("grabbing");
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    const x = e.clientX;
+    const walk = (startX - x) * 1.5;
+    slider.scrollLeft = scrollLeft + walk;
+  });
+
+  // Touch swipe — mobile
+  let touchStartX = 0;
+  slider.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.touches[0].clientX;
+    },
+    { passive: true },
+  );
+  slider.addEventListener(
+    "touchmove",
+    (e) => {
+      const diff = touchStartX - e.touches[0].clientX;
+      slider.scrollLeft += diff * 0.8;
+      touchStartX = e.touches[0].clientX;
+    },
+    { passive: true },
+  );
+
+  // Auto scroll
+  let autoScroll = setInterval(() => {
+    slider.scrollBy({ left: cardWidth(), behavior: "smooth" });
+  }, 3000);
+
+  // Pause auto scroll on interaction
+  slider.addEventListener("mouseenter", () => clearInterval(autoScroll));
+  slider.addEventListener("touchstart", () => clearInterval(autoScroll), {
+    passive: true,
+  });
+  slider.addEventListener("mouseleave", () => {
+    autoScroll = setInterval(() => {
+      slider.scrollBy({ left: cardWidth(), behavior: "smooth" });
+    }, 3000);
+  });
+}
