@@ -165,6 +165,48 @@ document.addEventListener("DOMContentLoaded", () => {
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const eventType = document.getElementById("event").value;
+      const date = document.getElementById("date").value;
+      const message = document.getElementById("message").value.trim();
+
+      if (!name) {
+        alert("Please enter your name.");
+        document.getElementById("name").focus();
+        return;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert("Please enter a valid email address.");
+        document.getElementById("email").focus();
+        return;
+      }
+      if (!eventType) {
+        alert("Please select your event type.");
+        document.getElementById("event").focus();
+        return;
+      }
+      if (!date) {
+        alert("Please select your event date.");
+        document.getElementById("date").focus();
+        return;
+      }
+      if (!message) {
+        alert("Please tell us about your dream event.");
+        document.getElementById("message").focus();
+        return;
+      }
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const chosen = new Date(date);
+      if (chosen < today) {
+        alert("Event date can't be in the past. Please pick a future date.");
+        document.getElementById("date").focus();
+        return;
+      }
+
       const btn = form.querySelector('button[type="submit"]');
       const original = btn.textContent;
 
@@ -178,10 +220,10 @@ document.addEventListener("DOMContentLoaded", () => {
           btn.textContent = "✦ Message Sent! We'll be in touch.";
           btn.style.background = "linear-gradient(135deg, #5a7a5a, #7aaa7a)";
           btn.style.opacity = "1";
+          btn.disabled = false;
           setTimeout(() => {
             btn.textContent = original;
             btn.style.background = "";
-            btn.disabled = false;
             form.reset();
           }, 3500);
         })
@@ -198,7 +240,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
   }
-
   /* ── Gallery placeholder patterns ── */
   const placeholders = document.querySelectorAll(".gi-placeholder");
   const patterns = [
@@ -258,10 +299,10 @@ document.addEventListener("DOMContentLoaded", () => {
           if (entry.isIntersecting) {
             const el = entry.target;
             const raw = el.textContent;
-          if (!/\d/.test(raw) || raw.includes("100")) {
-            countObserver.unobserve(el);
-            return;
-          }
+            if (!/\d/.test(raw) || raw.includes("100")) {
+              countObserver.unobserve(el);
+              return;
+            }
             const num = parseInt(raw.replace(/\D/g, ""), 10);
             const suffix = raw.replace(/\d/g, "");
             let start = 0;
@@ -342,125 +383,126 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   setVh();
   window.addEventListener("resize", setVh, { passive: true });
-});
-/* ── Floating Contact Widget ── */
-(function () {
-  const toggle   = document.getElementById("floatToggle");
-  const floatWA  = document.getElementById("floatWA");
-  const floatCall= document.getElementById("floatCall");
-  const widget   = document.getElementById("floatContact");
-  if (!toggle) return;
+  ;
+  /* ── Floating Contact Widget ── */
+  (function () {
+    const toggle = document.getElementById("floatToggle");
+    const floatWA = document.getElementById("floatWA");
+    const floatCall = document.getElementById("floatCall");
+    const widget = document.getElementById("floatContact");
+    if (!toggle) return;
 
-  let isOpen = false;
+    let isOpen = false;
 
-  const open = () => {
-    isOpen = true;
-    toggle.classList.add("open");
-    toggle.setAttribute("aria-expanded", "true");
-    floatCall.classList.add("visible");
-    floatWA.classList.add("visible");
-  };
+    const open = () => {
+      isOpen = true;
+      toggle.classList.add("open");
+      toggle.setAttribute("aria-expanded", "true");
+      floatCall.classList.add("visible");
+      floatWA.classList.add("visible");
+    };
 
-  const close = () => {
-    isOpen = false;
-    toggle.classList.remove("open");
-    toggle.setAttribute("aria-expanded", "false");
-    floatCall.classList.remove("visible");
-    floatWA.classList.remove("visible");
-  };
+    const close = () => {
+      isOpen = false;
+      toggle.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+      floatCall.classList.remove("visible");
+      floatWA.classList.remove("visible");
+    };
 
-  toggle.addEventListener("click", (e) => {
-    e.stopPropagation();
-    isOpen ? close() : open();
-  });
+    toggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      isOpen ? close() : open();
+    });
 
-  // Close when clicking outside the widget
-  document.addEventListener("click", (e) => {
-    if (isOpen && !widget.contains(e.target)) close();
-  });
+    // Close when clicking outside the widget
+    document.addEventListener("click", (e) => {
+      if (isOpen && !widget.contains(e.target)) close();
+    });
 
-  // Close on Escape key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && isOpen) close();
-  });
-})();
-/* ── Infinite Auto Moving Gallery ── */
-const slider = document.getElementById("gallerySlider");
+    // Close on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen) close();
+    });
+  })();
+  /* ── Infinite Auto Moving Gallery ── */
+  const slider = document.getElementById("gallerySlider");
 
-if (slider) {
-  const cards = Array.from(slider.querySelectorAll(".gs-card"));
+  if (slider) {
+    const cards = Array.from(slider.querySelectorAll(".gs-card"));
 
-  // Clone cards for infinite loop
-  cards.forEach(card => {
-    const clone = card.cloneNode(true);
-    clone.setAttribute("aria-hidden", "true");
-    slider.appendChild(clone);
-  });
+    // Clone cards for infinite loop
+    cards.forEach(card => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      slider.appendChild(clone);
+    });
 
-  cards.forEach(card => {
-    const clone = card.cloneNode(true);
-    clone.setAttribute("aria-hidden", "true");
-    slider.appendChild(clone);
-  });
+    cards.forEach(card => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      slider.appendChild(clone);
+    });
 
-  const cardWidth = () => slider.querySelector(".gs-card").offsetWidth + 24;
-  let speed = 1; // pixels per frame — increase for faster
-  let isPaused = false;
-  let animFrame;
+    const cardWidth = () => slider.querySelector(".gs-card").offsetWidth + 24;
+    let speed = 1; // pixels per frame — increase for faster
+    let isPaused = false;
+    let animFrame;
 
-  const autoMove = () => {
-    if (!isPaused) {
-      slider.scrollLeft += speed;
-      // Reset to start for infinite loop
-      if (slider.scrollLeft >= cardWidth() * cards.length) {
-        slider.scrollLeft = 0;
+    const autoMove = () => {
+      if (!isPaused) {
+        slider.scrollLeft += speed;
+        // Reset to start for infinite loop
+        if (slider.scrollLeft >= cardWidth() * cards.length) {
+          slider.scrollLeft = 0;
+        }
       }
-    }
-    animFrame = requestAnimationFrame(autoMove);
-  };
-  autoMove();
+      animFrame = requestAnimationFrame(autoMove);
+    };
+    autoMove();
 
-  // Pause on mouse drag
-  let isDown = false, startX, scrollLeft;
+    // Pause on mouse drag
+    let isDown = false, startX, scrollLeft;
 
-  slider.addEventListener("mousedown", (e) => {
-    isDown = true;
-    isPaused = true;
-    slider.classList.add("grabbing");
-    startX = e.clientX;
-    scrollLeft = slider.scrollLeft;
-    e.preventDefault();
-  });
+    slider.addEventListener("mousedown", (e) => {
+      isDown = true;
+      isPaused = true;
+      slider.classList.add("grabbing");
+      startX = e.clientX;
+      scrollLeft = slider.scrollLeft;
+      e.preventDefault();
+    });
 
-  document.addEventListener("mouseup", () => {
-    if (!isDown) return;
-    isDown = false;
-    slider.classList.remove("grabbing");
-    // Resume after 2 seconds
-    setTimeout(() => { isPaused = false; }, 2000);
-  });
+    document.addEventListener("mouseup", () => {
+      if (!isDown) return;
+      isDown = false;
+      slider.classList.remove("grabbing");
+      // Resume after 2 seconds
+      setTimeout(() => { isPaused = false; }, 2000);
+    });
 
-  document.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    const walk = (startX - e.clientX) * 1.5;
-    slider.scrollLeft = scrollLeft + walk;
-  });
+    document.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      const walk = (startX - e.clientX) * 1.5;
+      slider.scrollLeft = scrollLeft + walk;
+    });
 
-  // Pause on touch
-  slider.addEventListener("touchstart", (e) => {
-    isPaused = true;
-    startX = e.touches[0].clientX;
-    scrollLeft = slider.scrollLeft;
-  }, { passive: true });
+    // Pause on touch
+    slider.addEventListener("touchstart", (e) => {
+      isPaused = true;
+      startX = e.touches[0].clientX;
+      scrollLeft = slider.scrollLeft;
+    }, { passive: true });
 
-  slider.addEventListener("touchmove", (e) => {
-    const diff = startX - e.touches[0].clientX;
-    slider.scrollLeft += diff * 0.8;
-    startX = e.touches[0].clientX;
-  }, { passive: true });
+    slider.addEventListener("touchmove", (e) => {
+      const diff = startX - e.touches[0].clientX;
+      slider.scrollLeft += diff * 0.8;
+      startX = e.touches[0].clientX;
+    }, { passive: true });
 
-  slider.addEventListener("touchend", () => {
-    // Resume after 2 seconds
-    setTimeout(() => { isPaused = false; }, 2000);
-  }, { passive: true });
-}
+    slider.addEventListener("touchend", () => {
+      // Resume after 2 seconds
+      setTimeout(() => { isPaused = false; }, 2000);
+    }, { passive: true });
+  }
+})
